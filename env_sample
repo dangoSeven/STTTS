@@ -1,0 +1,4 @@
+ELEVEN_LABS_API_KEY = 'your api key here'
+VOICE_ID = 'voice id here'
+STABILITY = 0.6
+SIMILARITY_BOOST = 0.75
