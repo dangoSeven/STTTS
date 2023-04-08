@@ -1,7 +1,7 @@
 # STTTS
 ## Description
 
-A speech to text to speech script developed almost entirely using ChatGPT. Part of a series of scripts/apps that I'm building using ChatGPT.
+A speech to text to speech script developed almost entirely using ChatGPT. Part of a series of scripts/apps that I'm building using ChatGPT. Using Whipser for the Speech to Text and Eleven Labs for the Voice synthesis.
 
 ## Requirements
 
