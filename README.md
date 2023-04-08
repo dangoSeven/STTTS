@@ -10,6 +10,7 @@ A speech to text to speech script developed almost entirely using ChatGPT. Part 
 - You need FFMPEG installed on your machine and added to your system PATH.
 
 ## Setup
+- Download the latest release on the right. The VAD version incorporates a better voice detector so you will experience less voice "hallucinations" at the cost of a slightly longer delay.
 
 - Rename env_sample to .env
 
