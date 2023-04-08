@@ -13,5 +13,9 @@ if errorlevel 1 (
 echo Installing dependencies from requirements.txt...
 pip install -r requirements.txt
 
+echo Getting Voice IDs...
+python voices.py
+pause
+
 echo Running stts.py...
 python sttts.py
