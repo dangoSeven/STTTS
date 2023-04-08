@@ -16,11 +16,14 @@ A speech to text to speech script developed almost entirely using ChatGPT. Part 
 
 - Edit the .env with notepad or some text editor
 
+- If you haven't done so already, you need an Eleven Labs account. For custom voices you will have to train them yourself using the Eleven Labs Voice Lab.
+
 - Replace 'your api key here' with your Eleven Labs API Key. Keep the single quotes.
 
 - Do the same with the Voice ID. This is the ID of the voice that you will be using. Keep the single quotes.
 
 - When you run start.bat you'll see a list of all your voices and their IDs. Or you can use this API call from the Eleven Labs website: https://api.elevenlabs.io/docs#/voices/Get_voices_v1_voices_get
+
 
 ## Usage
 
@@ -36,7 +39,7 @@ A speech to text to speech script developed almost entirely using ChatGPT. Part 
 
 ## Disclaimer
 - 99% of this code came from ChatGPT. You're welcome to go through the included python files to see how all this works. Feel free to Fork this to improve upon it.
-- If you're using this for your stream or something, give me a little shouout sometime :)
+- If you're using this for your stream or something, give me a little shoutout sometime :)
 
 ## Common problems
 - The STTTS sometimes starts hallucinating and says thing you didnt say. You can try switching to the STTTS_VAD branch on this repo. For that version of the script, I had ChatGPT implement a Voice Activity Detector to ensure that there is actually some voice audio in the input files before the speech is synthesized. 
