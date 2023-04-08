@@ -36,3 +36,7 @@ A speech to text to speech script developed almost entirely using ChatGPT. Part 
 ## Disclaimer
 - 99% of this code came from ChatGPT. You're welcome to go through the included python files to see how all this works. Feel free to Fork this to improve upon it.
 - If you're using this for your stream or something, give me a little shouout sometime :)
+
+## Common problems
+- The STTTS sometimes starts hallucinating and says thing you didnt say. You can try switching to the STTTS_VAD branch on this repo. For that version of the script, I had ChatGPT implement a Voice Activity Detector to ensure that there is actually some voice audio in the input files before the speech is synthesized. 
+- STTTS_VAD introduces more delay in the application. 
