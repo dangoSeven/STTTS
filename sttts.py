@@ -11,9 +11,20 @@ import pygame
 import re
 import threading
 import queue
-import dotenv
-
 from collections import defaultdict
+import torch
+import dotenv
+from omegaconf import OmegaConf
+
+vad_model, utils = torch.hub.load(repo_or_dir='snakers4/silero-vad',
+                              model='silero_vad',
+                              force_reload=True)
+
+(get_speech_timestamps,
+ save_audio,
+ read_audio,
+ VADIterator,
+ collect_chunks) = utils
 
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
@@ -29,25 +40,18 @@ voice_id = str(os.getenv('VOICE_ID'))
 stability = os.getenv('STABILITY')
 similarity_boost = os.getenv('SIMILARITY_BOOST')
 
-
 played_files = defaultdict(lambda: False)
 
 model = whisper.load_model("small")
 
 file_queue = queue.Queue()
 
-
 def play_audio(filename):
-    reduced_sample_rate = 44100  # Lower sample rate (default: 44100)
-    reduced_bit_depth = -16       # Lower bit depth (default: -16)
-
-    pygame.mixer.init(frequency=reduced_sample_rate, size=reduced_bit_depth)
+    pygame.mixer.init()
     pygame.mixer.music.load(filename)
     pygame.mixer.music.play()
-
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(10)
-
     pygame.mixer.quit()
 
 def save_audio(filename, recording, samplerate=44100):
@@ -167,15 +171,23 @@ def record_audio():
         wf.writeframes(b"".join(frames))
         wf.close()
 
-        file_queue.put(filename)  # Add the file to the queue
-        fileCount = fileCount + 1
+
+        # Check if the audio contains voice using Silero VAD
+        wav = read_audio(filename, sampling_rate=16000)
+        speech_timestamps = get_speech_timestamps(wav, vad_model, sampling_rate=16000)
+
+        if len(speech_timestamps) > 0:
+            file_queue.put(filename)  # Add the file to the queue if there's voice detected
+            fileCount = fileCount + 1
+        else:
+            print("No voice detected, not saving.")
+
     else:
         print("Recording too short, not saving.")
 
 
 if __name__ == "__main__":
-        
-    processing_thread = threading.Thread(target=process_audio_files)
+    processing_thread = threading.Thread(target=process_audio_files, daemon=True)
     processing_thread.start()
 
     while True:
