@@ -7,6 +7,16 @@ A speech to text to speech script developed almost entirely using ChatGPT. Part 
 
 - I'm using Python 3.10.10 for this.
 
+- Install CUDA https://developer.nvidia.com/cuda-downloads
+  - I'm using version 11.7.0
+
+- Install Torch with CUDA support
+  - pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+  - You can run this in your command prompt to see if CUDA is enabled
+    - python -c "import torch; print("CUDA enabled:", torch.cuda.is_available());"
+  - If you already had torch installed before downloading CUDA, you might need to uninstall and purge it, then reinstall using the command above
+    - pip uninstall torch && pip cache purge
+
 - You need FFMPEG installed on your machine and added to your system PATH.
 
 ## Setup
