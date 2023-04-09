@@ -10,6 +10,9 @@ if errorlevel 1 (
     echo FFmpeg found in system PATH.
 )
 
+echo Installing Torch with CUDA support...
+pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+
 echo Installing dependencies from requirements.txt...
 pip install -r requirements.txt
 
@@ -17,5 +20,5 @@ echo Getting Voice IDs...
 python voices.py
 pause
 
-echo Running stts.py...
+echo Running sttts.py...
 python sttts.py
